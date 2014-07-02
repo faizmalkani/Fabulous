@@ -1,0 +1,104 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:id="@+id/blueButton"
+                android:onClick="colorToggle"
+                android:layout_margin="8dp"
+                android:background="#33b5e5" />
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:id="@+id/purpleButton"
+                android:onClick="colorToggle"
+                android:layout_margin="8dp"
+                android:background="#aa66cc" />
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:id="@+id/greenButton"
+                android:onClick="colorToggle"
+                android:layout_margin="8dp"
+                android:background="#99cc00" />
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:id="@+id/orangeButton"
+                android:onClick="colorToggle"
+                android:layout_margin="8dp"
+                android:background="#ffbb33" />
+
+            <View
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:clickable="true"
+                android:id="@+id/redButton"
+                android:onClick="colorToggle"
+                android:layout_margin="8dp"
+                android:background="#ff4444" />
+        </LinearLayout>
+        
+        <LinearLayout 
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal">
+            
+            <Button 
+                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:text="Hide FAB"
+                android:onClick="hideFab"
+                android:layout_weight="1"
+                style="?android:borderlessButtonStyle"/>
+            
+            <Button 
+                android:layout_height="60dp"
+                android:layout_width="0dp"
+                android:text="Show FAB"
+                android:onClick="showFab"
+                android:layout_weight="1"
+                style="?android:borderlessButtonStyle"/>
+            
+        </LinearLayout>
+        
+    </LinearLayout>
+
+    <com.faizmalkani.floatingactionbutton.sample.Fab
+        android:id="@+id/fabbutton"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp" />
+
+</FrameLayout>
