@@ -35,7 +35,7 @@ Instructions
     
 2. Initialize your FAB in your activity's onCreate()
 
-    Fab mFab = (Fab)findViewById(R.id.fabbutton);
+         Fab mFab = (Fab)findViewById(R.id.fabbutton);
     
     
 3. Set the drawable and color of the FAB
