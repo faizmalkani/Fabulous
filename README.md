@@ -8,28 +8,28 @@ Instructions
 
 1. Place the FAB in a FrameLayout and add your layouts above the FAB view. For best results, keep the FAB height and width at 72dp and in the bottom right of the FrameLayout
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+          <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
     
-        <!--
+              <!--
     
-                Your layouts here. Do not put anything below the FAB layout
-            
-        -->        
+                     Your layouts here. Do not put anything below the FAB layout
+                 
+              -->        
 
     
 
-        <com.faizmalkani.floatingactionbutton.sample.Fab
-            android:id="@+id/fabbutton"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp" />
+             <com.faizmalkani.floatingactionbutton.sample.Fab
+                 android:id="@+id/fabbutton"
+                 android:layout_width="72dp"
+                 android:layout_height="72dp"
+                 android:layout_gravity="bottom|right"
+                 android:layout_marginBottom="16dp"
+                 android:layout_marginRight="16dp" />
 
-    </FrameLayout>
+         </FrameLayout>
     
     
     
