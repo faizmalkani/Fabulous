@@ -40,16 +40,19 @@ Instructions
     
 3. Set the drawable and color of the FAB
 
-    mFab.setFabColor(int fabColor);
-    mFab.setFabDrawable(Drawable fabDrawable);
+         mFab.setFabColor(int fabColor);
+         mFab.setFabDrawable(Drawable fabDrawable);
     
     
 4. If needed, call the other methods of the FAB
 
-    mFab.hideFab();
-    mFab.showFab();
-    mFab.setAlpha();
-    mFab.setOnClickListener();
+         mFab.hideFab();
+         mFab.showFab();
+         mFab.setAlpha();
+      mFab.setOnClickListener();
+         
+    
+    
     
     
     
