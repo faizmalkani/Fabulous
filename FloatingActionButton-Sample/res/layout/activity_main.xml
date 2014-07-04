@@ -93,7 +93,7 @@
         
     </LinearLayout>
 
-    <com.faizmalkani.floatingactionbutton.sample.Fab
+    <com.faizmalkani.floatingactionbutton.Fab
         android:id="@+id/fabbutton"
         android:layout_width="72dp"
         android:layout_height="72dp"

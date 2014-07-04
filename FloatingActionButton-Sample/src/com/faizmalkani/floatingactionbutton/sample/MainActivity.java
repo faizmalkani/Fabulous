@@ -1,11 +1,16 @@
 package com.faizmalkani.floatingactionbutton.sample;
 
+import com.faizmalkani.floatingactionbutton.Fab;
 import com.faizmalkani.floatingactionbutton.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 public class MainActivity extends Activity 
@@ -19,10 +24,33 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     	mFab = (Fab)findViewById(R.id.fabbutton);
+    	mFab.setFabColor(Color.WHITE);
+    	mFab.setFabDrawable(getResources().getDrawable(R.drawable.ic_content_edit));
     	getActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
     }
     
-    public void hideFab(View view)
+    
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) 
+    {
+    	 MenuInflater inflater = getMenuInflater();
+    	    inflater.inflate(R.menu.main, menu);
+    	    return true;
+	}
+
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
+		startActivity(new Intent(this, About.class));
+		return super.onOptionsItemSelected(item);
+	}
+
+
+
+	public void hideFab(View view)
     {
     	mFab.hideFab();
     	getActionBar().hide();
