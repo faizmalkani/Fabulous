@@ -1,6 +1,6 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
@@ -101,7 +101,7 @@
         android:layout_gravity="bottom|right"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
-        fab:color="#FFDF4D38"
-        fab:drawable="@drawable/ic_content_discard"/>
+        app:color="#FFDF4D38"
+        app:drawable="@drawable/ic_content_discard"/>
 
 </FrameLayout>

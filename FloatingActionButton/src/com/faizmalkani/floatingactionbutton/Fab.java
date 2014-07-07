@@ -114,5 +114,4 @@ public class Fab extends View {
             mHidden = false;
         }
     }
-
 }
