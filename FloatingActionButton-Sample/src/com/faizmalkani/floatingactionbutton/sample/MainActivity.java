@@ -9,18 +9,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-import com.faizmalkani.floatingactionbutton.Fab;
+import com.faizmalkani.floatingactionbutton.FloatingActionButton;
+
 
 public class MainActivity extends Activity {
 
-    Fab mFab;
+    FloatingActionButton mFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mFab = (Fab) findViewById(R.id.fabbutton);
+        mFab = (FloatingActionButton) findViewById(R.id.fabbutton);
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
     }
 
@@ -41,13 +43,17 @@ public class MainActivity extends Activity {
 
 
     public void hideFab(View view) {
-        mFab.hideFab();
+        mFab.hide(true);
         //getActionBar().hide();
     }
 
     public void showFab(View view) {
-        mFab.showFab();
+        mFab.hide(false);
         //getActionBar().show();
+    }
+
+    public void fabClicked(View view) {
+        Toast.makeText(this, "Hello!", Toast.LENGTH_LONG).show();
     }
 
     public void colorToggle(View view) {

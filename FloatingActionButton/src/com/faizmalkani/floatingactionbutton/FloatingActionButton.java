@@ -1,0 +1,108 @@
+package com.faizmalkani.floatingactionbutton;
+
+import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+import android.view.Display;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Interpolator;
+
+public class FloatingActionButton extends View {
+
+    private final Interpolator mInterpolator = new AccelerateDecelerateInterpolator();
+    private final Paint mButtonPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mDrawablePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Bitmap mBitmap;
+    private int mScreenHeight;
+    private float mCurrentY;
+    private boolean mHidden = false;
+
+    public FloatingActionButton(Context context) {
+        this(context, null);
+    }
+
+    public FloatingActionButton(Context context, AttributeSet attributeSet) {
+        this(context, attributeSet, 0);
+    }
+
+    public FloatingActionButton(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.FloatingActionButton);
+        int color = a.getColor(R.styleable.FloatingActionButton_color, Color.WHITE);
+        mButtonPaint.setStyle(Paint.Style.FILL);
+        mButtonPaint.setColor(color);
+        mButtonPaint.setShadowLayer(10.0f, 0.0f, 3.5f, Color.argb(100, 0, 0, 0));
+
+        Drawable drawable = a.getDrawable(R.styleable.FloatingActionButton_drawable);
+        if (null != drawable) {
+            mBitmap = ((BitmapDrawable) drawable).getBitmap();
+        }
+        setWillNotDraw(false);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
+        WindowManager mWindowManager = (WindowManager)
+                context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = mWindowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        mScreenHeight = size.y;
+    }
+
+    public void setColor(int color) {
+        mButtonPaint.setColor(color);
+        invalidate();
+    }
+
+    public void setDrawable(Drawable drawable) {
+        mBitmap = ((BitmapDrawable) drawable).getBitmap();
+        invalidate();
+    }
+
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, (float) (getWidth() / 2.6), mButtonPaint);
+        if (null != mBitmap) {
+            canvas.drawBitmap(mBitmap, (getWidth() - mBitmap.getWidth()) / 2,
+                    (getHeight() - mBitmap.getHeight()) / 2, mDrawablePaint);
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            setAlpha(1.0f);
+        } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            setAlpha(0.6f);
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public void hide(boolean hide) {
+        if (mHidden != hide) {
+            float offset;
+            if (mHidden) {
+                offset = mCurrentY;
+            } else {
+                mCurrentY = getY();
+                offset = mScreenHeight;
+            }
+            mHidden = hide;
+            ObjectAnimator animator = ObjectAnimator.ofFloat(this, "Y", offset);
+            animator.setInterpolator(mInterpolator);
+            animator.start();
+        }
+    }
+}
