@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.AbsListView;
 
 public class FloatingActionButton extends View {
 
@@ -25,6 +26,7 @@ public class FloatingActionButton extends View {
     private final Paint mDrawablePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Bitmap mBitmap;
     private int mScreenHeight;
+    private int mColor;
     private float mCurrentY;
     private boolean mHidden = false;
 
@@ -40,10 +42,15 @@ public class FloatingActionButton extends View {
         super(context, attrs, defStyleAttr);
 
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.FloatingActionButton);
-        int color = a.getColor(R.styleable.FloatingActionButton_color, Color.WHITE);
+        mColor = a.getColor(R.styleable.FloatingActionButton_color, Color.WHITE);
         mButtonPaint.setStyle(Paint.Style.FILL);
-        mButtonPaint.setColor(color);
-        mButtonPaint.setShadowLayer(10.0f, 0.0f, 3.5f, Color.argb(100, 0, 0, 0));
+        mButtonPaint.setColor(mColor);
+        float radius, dx, dy;
+        radius = a.getFloat(R.styleable.FloatingActionButton_shadowRadius, 10.0f);
+        dx = a.getFloat(R.styleable.FloatingActionButton_shadowDx, 0.0f);
+        dy = a.getFloat(R.styleable.FloatingActionButton_shadowDy, 3.5f);
+        int color = a.getInteger(R.styleable.FloatingActionButton_shadowColor, Color.argb(100, 0, 0, 0));
+        mButtonPaint.setShadowLayer(radius, dx, dy, color);
 
         Drawable drawable = a.getDrawable(R.styleable.FloatingActionButton_drawable);
         if (null != drawable) {
@@ -61,7 +68,8 @@ public class FloatingActionButton extends View {
     }
 
     public void setColor(int color) {
-        mButtonPaint.setColor(color);
+        mColor = color;
+        mButtonPaint.setColor(mColor);
         invalidate();
     }
 
@@ -82,11 +90,14 @@ public class FloatingActionButton extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int color;
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            setAlpha(1.0f);
-        } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            setAlpha(0.6f);
+            color = mColor;
+        } else {
+            color = darkenColor(mColor);
         }
+        mButtonPaint.setColor(color);
+        invalidate();
         return super.onTouchEvent(event);
     }
 
@@ -104,5 +115,18 @@ public class FloatingActionButton extends View {
             animator.setInterpolator(mInterpolator);
             animator.start();
         }
+    }
+
+    public void listenTo(AbsListView listView) {
+        if (null != listView) {
+            listView.setOnScrollListener(new DirectionScrollListener(this));
+        }
+    }
+
+    public static int darkenColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] *= 0.8f;
+        return Color.HSVToColor(hsv);
     }
 }
