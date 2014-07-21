@@ -24,8 +24,11 @@ public class Fab extends View
     Paint mButtonPaint, mDrawablePaint;
     Bitmap  mBitmap;
     int mScreenHeight;
-	float currentY;;
+    float currentY;
     boolean mHidden = false;
+    
+    ObjectAnimator mShowAnimation;
+    ObjectAnimator mHideAnimation;
 
     public Fab(Context context, AttributeSet attributeSet)
     {
@@ -49,8 +52,7 @@ public class Fab extends View
     
     public void setFabDrawable(Drawable fabDrawable)
     {
-    	Drawable myDrawable = fabDrawable;
-        mBitmap = ((BitmapDrawable) myDrawable).getBitmap();
+        mBitmap = ((BitmapDrawable) fabDrawable).getBitmap();
         invalidate();
     }
     
@@ -71,6 +73,9 @@ public class Fab extends View
 		Point size = new Point();
 		display.getSize(size);
 		mScreenHeight = size.y;
+		
+	mShowAnimation = ObjectAnimator.ofFloat(this, "Y", currentY);
+        mHideAnimation = ObjectAnimator.ofFloat(this, "Y", mScreenHeight);
     }
     
     @Override
@@ -98,16 +103,15 @@ public class Fab extends View
 	public int dpToPx(int dp) 
 	{
 	    DisplayMetrics displayMetrics = getContext().getResources().getDisplayMetrics();
-	    int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));       
-	    return px;
+	    return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));       
 	}
 	
 	public void hideFab()
 	{
-		if(mHidden == false)
+		if(!mHidden && mShowAnimation != null && !mShowAnimation.isRunning())
 		{
 			currentY = getY();
-			ObjectAnimator mHideAnimation = ObjectAnimator.ofFloat(this, "Y", mScreenHeight);
+			mHideAnimation = ObjectAnimator.ofFloat(this, "Y", mScreenHeight);
 			mHideAnimation.setInterpolator(new AccelerateInterpolator());
 			mHideAnimation.start();
 			mHidden = true;
@@ -116,13 +120,17 @@ public class Fab extends View
 	
 	public void showFab()
 	{
-		if(mHidden == true)
+		if(mHidden && mHideAnimation != null && !mHideAnimation.isRunning())
 		{
-			ObjectAnimator mShowAnimation = ObjectAnimator.ofFloat(this, "Y", currentY);
+			mShowAnimation = ObjectAnimator.ofFloat(this, "Y", currentY);
 			mShowAnimation.setInterpolator(new DecelerateInterpolator());
 			mShowAnimation.start();
 			mHidden = false;
 		}
+	}
+	
+	public boolean isHidden(){
+		return mHidden;
 	}
     
 }
