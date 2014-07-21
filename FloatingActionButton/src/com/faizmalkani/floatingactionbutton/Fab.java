@@ -26,6 +26,9 @@ public class Fab extends View
     int mScreenHeight;
     float currentY;
     boolean mHidden = false;
+    
+    ObjectAnimator mShowAnimation;
+    ObjectAnimator mHideAnimation;
 
     public Fab(Context context, AttributeSet attributeSet)
     {
@@ -70,6 +73,9 @@ public class Fab extends View
 		Point size = new Point();
 		display.getSize(size);
 		mScreenHeight = size.y;
+		
+	mShowAnimation = ObjectAnimator.ofFloat(this, "Y", currentY);
+        mHideAnimation = ObjectAnimator.ofFloat(this, "Y", mScreenHeight);
     }
     
     @Override
@@ -102,10 +108,10 @@ public class Fab extends View
 	
 	public void hideFab()
 	{
-		if(!mHidden)
+		if(!mHidden && mShowAnimation != null && !mShowAnimation.isRunning())
 		{
 			currentY = getY();
-			ObjectAnimator mHideAnimation = ObjectAnimator.ofFloat(this, "Y", mScreenHeight);
+			mHideAnimation = ObjectAnimator.ofFloat(this, "Y", mScreenHeight);
 			mHideAnimation.setInterpolator(new AccelerateInterpolator());
 			mHideAnimation.start();
 			mHidden = true;
@@ -114,9 +120,9 @@ public class Fab extends View
 	
 	public void showFab()
 	{
-		if(mHidden)
+		if(mHidden && mHideAnimation != null && !mHideAnimation.isRunning())
 		{
-			ObjectAnimator mShowAnimation = ObjectAnimator.ofFloat(this, "Y", currentY);
+			mShowAnimation = ObjectAnimator.ofFloat(this, "Y", currentY);
 			mShowAnimation.setInterpolator(new DecelerateInterpolator());
 			mShowAnimation.start();
 			mHidden = false;
