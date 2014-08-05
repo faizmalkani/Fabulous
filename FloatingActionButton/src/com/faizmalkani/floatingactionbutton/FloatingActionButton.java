@@ -42,6 +42,12 @@ public class FloatingActionButton extends View {
         super(context, attrs, defStyleAttr);
 
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.FloatingActionButton);
+        int drawableReference = a.getResourceId(R.styleable.FloatingActionButton_icon, -1);
+
+        if (drawableReference > -1) {
+            mBitmap = BitmapFactory.decodeResource(getResources(), drawableReference);
+        }
+        
         mColor = a.getColor(R.styleable.FloatingActionButton_color, Color.WHITE);
         mButtonPaint.setStyle(Paint.Style.FILL);
         mButtonPaint.setColor(mColor);
