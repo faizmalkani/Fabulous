@@ -28,3 +28,4 @@ gen/
 # Gradle
 build/
 .gradle
+/build
