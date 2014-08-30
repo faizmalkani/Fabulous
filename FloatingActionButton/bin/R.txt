@@ -1,1 +1,0 @@
-int drawable ic_content_new 0x7f020000
