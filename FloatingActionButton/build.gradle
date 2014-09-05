@@ -5,7 +5,7 @@ android {
 
     defaultConfig {
         applicationId 'com.faizmalkani.floatingactionbutton'
-	minSdkVersion 14
+        minSdkVersion 7
         targetSdkVersion 19
         versionName "1.0"
         versionCode 1
@@ -25,4 +25,6 @@ android {
 }
 
 dependencies {
+    compile 'com.nineoldandroids:library:2.4.0'
+
 }
