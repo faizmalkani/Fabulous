@@ -21,13 +21,16 @@ Use Drawables of size `24dp` as FabDrawables to get the desired look. Drawables 
         -->
 
 
-        <com.faizmalkani.floatingactionbutton.sample.Fab
+        <com.faizmalkani.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabbutton"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            app:drawable="@drawable/ic_action_edit"
+            app:color="@color/action_bar_background"
+            />
 
     </FrameLayout>
     ```
