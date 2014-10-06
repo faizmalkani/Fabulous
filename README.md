@@ -29,7 +29,7 @@ Use Drawables of size `24dp` as FabDrawables to get the desired look. Drawables 
             android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp"
             app:drawable="@drawable/ic_action_edit"
-            app:color="@color/action_bar_background"
+            app:color="@color/some_color"
             />
 
     </FrameLayout>
