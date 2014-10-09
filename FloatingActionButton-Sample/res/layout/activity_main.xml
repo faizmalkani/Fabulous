@@ -1,6 +1,6 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,7 +23,7 @@
                 android:layout_weight="1"
                 android:background="#33b5e5"
                 android:clickable="true"
-                android:onClick="colorToggle"/>
+                android:onClick="colorToggle" />
 
             <View
                 android:id="@+id/purpleButton"
@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:background="#aa66cc"
                 android:clickable="true"
-                android:onClick="colorToggle"/>
+                android:onClick="colorToggle" />
 
             <View
                 android:id="@+id/greenButton"
@@ -43,7 +43,7 @@
                 android:layout_weight="1"
                 android:background="#99cc00"
                 android:clickable="true"
-                android:onClick="colorToggle"/>
+                android:onClick="colorToggle" />
 
             <View
                 android:id="@+id/orangeButton"
@@ -53,7 +53,7 @@
                 android:layout_weight="1"
                 android:background="#ffbb33"
                 android:clickable="true"
-                android:onClick="colorToggle"/>
+                android:onClick="colorToggle" />
 
             <View
                 android:id="@+id/redButton"
@@ -63,7 +63,7 @@
                 android:layout_weight="1"
                 android:background="#ff4444"
                 android:clickable="true"
-                android:onClick="colorToggle"/>
+                android:onClick="colorToggle" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,7 +78,8 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:onClick="hideFab"
-                android:text="Hide FAB"/>
+                android:text="Hide FAB"
+                tools:ignore="NewApi" />
 
             <Button
                 style="?android:borderlessButtonStyle"
@@ -86,7 +87,8 @@
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:onClick="showFab"
-                android:text="Show FAB"/>
+                android:text="Show FAB"
+                tools:ignore="NewApi" />
 
         </LinearLayout>
 
@@ -94,18 +96,19 @@
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
 
     <com.faizmalkani.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabbutton"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:onClick="fabClicked"
         app:color="#FFDF4D38"
-        app:drawable="@drawable/ic_content_discard"/>
+        app:drawable="@drawable/ic_content_discard" />
 
 </FrameLayout>
