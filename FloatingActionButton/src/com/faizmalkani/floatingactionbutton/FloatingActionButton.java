@@ -30,6 +30,11 @@ public class FloatingActionButton extends View {
     private Bitmap mBitmap;
     private int mColor;
     private boolean mHidden = false;
+    private Rect rect;
+    private int mLeftDisplayed = -1;
+    private int mRightDisplayed = -1;
+    private int mTopDisplayed = -1;
+    private int mBottomDisplayed = -1;
     /**
      * The FAB button's Y position when it is displayed.
      */
@@ -111,10 +116,15 @@ public class FloatingActionButton extends View {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // Perform the default behavior
         super.onLayout(changed, left, top, right, bottom);
+        if (mLeftDisplayed == -1) {
+            mLeftDisplayed = left;
+            mRightDisplayed = right;
+            mTopDisplayed = top;
+            mBottomDisplayed = bottom;
+        }
 
         // Store the FAB button's displayed Y position if we are not already aware of it
         if (mYDisplayed == -1) {
-
             mYDisplayed = ViewHelper.getY(this);
         }
     }
@@ -126,6 +136,12 @@ public class FloatingActionButton extends View {
             color = mColor;
         } else {
             color = darkenColor(mColor);
+            rect = new Rect(mLeftDisplayed, mTopDisplayed, mRightDisplayed, mBottomDisplayed);
+        }
+        if (event.getAction() == MotionEvent.ACTION_MOVE){
+            if (!rect.contains(mLeftDisplayed + (int) event.getX(), mTopDisplayed + (int) event.getY())){
+                color = mColor;
+            }
         }
         mButtonPaint.setColor(color);
         invalidate();
