@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -100,6 +101,11 @@ public class FloatingActionButton extends View {
 
     public void setDrawable(Drawable drawable) {
         mBitmap = ((BitmapDrawable) drawable).getBitmap();
+        invalidate();
+    }
+
+    public void setShadow(float radius, float dx, float dy, int color) {
+        mButtonPaint.setShadowLayer(radius, dx, dy, color);
         invalidate();
     }
 
