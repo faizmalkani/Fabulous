@@ -8,6 +8,7 @@
         <attr name="shadowDx" format="float"/>
         <attr name="shadowDy" format="float"/>
         <attr name="shadowColor" format="integer"/>
+        <attr name="icon" format="reference" />
     </declare-styleable>
 
 </resources>
